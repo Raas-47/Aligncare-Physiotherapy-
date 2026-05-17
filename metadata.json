@@ -1,0 +1,8 @@
+{
+  "name": "AlignCare Physiotherapy",
+  "description": "A simple physiotherapy app for patients in Kolkata, featuring booking, exercises, and recovery tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
