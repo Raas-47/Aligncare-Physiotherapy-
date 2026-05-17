@@ -247,7 +247,7 @@ export default function Home() {
           <p className="text-[#636E72] text-lg font-medium font-serif italic text-opacity-80">Use our simple digital tools to track your progress and do your exercises properly.</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <FeatureCard 
             to="/exercises"
             icon={<Activity className="w-8 h-8 text-[#4A7C59]" />}
@@ -261,13 +261,6 @@ export default function Home() {
             title={t('Check Pain', 'ব্যথা পরীক্ষা')}
             subtitle={t('Assess your current mobility and pain level.', 'আপনার বর্তমান ব্যথা এবং নড়াচড়া মূল্যায়ন করুন।')}
             bgColor="bg-[#FFF9EA]"
-          />
-          <FeatureCard 
-            to="/dashboard"
-            icon={<CheckCircle2 className="w-8 h-8 text-[#2980B9]" />}
-            title={t('Recovery Progress', 'সুস্থতার অগ্রগতি')}
-            subtitle={t('Track your daily improvements.', 'আপনার প্রতিদিনের উন্নতি ট্র্যাক করুন।')}
-            bgColor="bg-[#EAF2F8]"
           />
           <FeatureCard 
             to="/book"
