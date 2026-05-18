@@ -205,6 +205,18 @@ export default function Home() {
              </div>
           </div>
         </div>
+
+        <div className="flex justify-center pt-8">
+          <a 
+            href="https://g.page/r/Cb-u7tj6fTLIEAE/review"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-[#E0Dcd0] text-[#1A2A1E] font-medium rounded-full shadow-sm hover:border-[#1A2A1E] hover:bg-[#F5F2ED] transition-all"
+          >
+            <svg className="w-5 h-5 text-[#F1C40F]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            Review us on Google
+          </a>
+        </div>
       </section>
 
       {/* FAQ Section */}
