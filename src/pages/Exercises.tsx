@@ -25,6 +25,15 @@ const EXERCISES = [
     reps: 10,
     videoUrl: 'https://images.unsplash.com/photo-1518611012118-696072aa579a?q=80&w=800&auto=format&fit=crop',
     completed: false
+  },
+  {
+    id: 4,
+    title: { en: 'Meditation', bn: 'মেডিটেশন' },
+    reps: 1,
+    videoUrl: 'https://images.unsplash.com/photo-1593811167562-9cef47bfc4d7?q=80&w=800&auto=format&fit=crop',
+    audioUrl: 'https://actions.google.com/sounds/v1/ambient/atmospheric_background_sound.ogg',
+    isMeditation: true,
+    completed: false
   }
 ];
 
@@ -99,10 +108,12 @@ export default function Exercises() {
         {lang === 'en' ? currentEx.title.en : currentEx.title.bn}
       </h2>
       <p className="text-[#636E72] font-medium mb-6">
-        {t(`Goal: ${currentEx.reps} repetitions`, `লক্ষ্য: ${currentEx.reps} বার`)}
+        {currentEx.isMeditation 
+          ? t('Goal: Relax and listen to binaural beats', 'লক্ষ্য: শান্ত হন এবং বিনরাল বিটস শুনুন')
+          : t(`Goal: ${currentEx.reps} repetitions`, `লক্ষ্য: ${currentEx.reps} বার`)}
       </p>
 
-      {/* Video Area */}
+      {/* Video/Audio Area */}
       <div className="relative aspect-video bg-[#1A2A1E] rounded-[2rem] overflow-hidden mb-8 shadow-sm border border-[#E0E6E0]">
         <img 
           src={currentEx.videoUrl} 
@@ -110,48 +121,66 @@ export default function Exercises() {
           className="w-full h-full object-cover opacity-60"
         />
         
+        {currentEx.isMeditation && (
+          <div className="absolute inset-x-0 bottom-4 flex justify-center z-20 px-8">
+            <audio src={currentEx.audioUrl} controls className="w-full max-w-sm rounded-full drop-shadow-lg" />
+          </div>
+        )}
+        
         {/* Play Button Overlay */}
-        {!isPlaying && (
+        {!isPlaying && !currentEx.isMeditation && (
           <button 
             onClick={() => setIsPlaying(true)}
-            className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors"
+            className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors z-10"
           >
              <PlayCircle className="w-16 h-16 text-white drop-shadow-lg" />
           </button>
         )}
 
         {/* Audio guidance indicator */}
-        {isPlaying && (
-          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2 text-white/90 text-xs font-medium animate-pulse">
+        {isPlaying && !currentEx.isMeditation && (
+          <div className="absolute top-4 right-4 bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full flex items-center gap-2 text-white/90 text-xs font-medium animate-pulse z-10">
             <Volume2 className="w-3.5 h-3.5" />
             {t('Bengali Audio ON', 'বাংলা ভয়েস চালু')}
           </div>
         )}
       </div>
 
-      {/* Counter */}
-      <div className="flex-1 flex flex-col items-center justify-center bg-[#F9FBF9] rounded-[2rem] p-6 border border-[#E0E6E0] mb-6 shadow-sm">
-        <span className="text-sm text-[#636E72] font-bold uppercase tracking-wider mb-2">
-          {t('Counter', 'কাউন্টার')}
-        </span>
-        <div className="flex items-center gap-8">
-          <button 
-            onClick={() => setRepsDone(Math.max(0, repsDone - 1))}
-            className="w-12 h-12 rounded-full border-2 border-[#E0E6E0] flex items-center justify-center text-[#1A2A1E] active:bg-[#E8EEE8]"
-          >
-            -
-          </button>
-          <div className="text-6xl font-black text-[#1A2A1E] w-24 text-center tabular-nums">
-            {repsDone}
+      {/* Counter or Info */}
+      {!currentEx.isMeditation ? (
+        <div className="flex-1 flex flex-col items-center justify-center bg-[#F9FBF9] rounded-[2rem] p-6 border border-[#E0E6E0] mb-6 shadow-sm">
+          <span className="text-sm text-[#636E72] font-bold uppercase tracking-wider mb-2">
+            {t('Counter', 'কাউন্টার')}
+          </span>
+          <div className="flex items-center gap-8">
+            <button 
+              onClick={() => setRepsDone(Math.max(0, repsDone - 1))}
+              className="w-12 h-12 rounded-full border-2 border-[#E0E6E0] flex items-center justify-center text-[#1A2A1E] active:bg-[#E8EEE8]"
+            >
+              -
+            </button>
+            <div className="text-6xl font-black text-[#1A2A1E] w-24 text-center tabular-nums">
+              {repsDone}
+            </div>
+            <button 
+              onClick={() => setRepsDone(repsDone + 1)}
+              className="w-12 h-12 rounded-full border-2 border-transparent bg-[#EAF2EA] flex items-center justify-center text-[#4A7C59] active:brightness-95 font-bold text-xl"
+            >
+              +
+            </button>
           </div>
-          <button 
-            onClick={() => setRepsDone(repsDone + 1)}
-            className="w-12 h-12 rounded-full border-2 border-transparent bg-[#EAF2EA] flex items-center justify-center text-[#4A7C59] active:brightness-95 font-bold text-xl"
-          >
-            +
-          </button>
         </div>
-      </div>
+      ) : (
+        <div className="flex-1 flex flex-col items-center text-center justify-center bg-[#F9FBF9] rounded-[2rem] p-6 border border-[#E0E6E0] mb-6 shadow-sm space-y-4">
+          <Volume2 className="w-8 h-8 text-[#4A7C59]" />
+          <h3 className="text-xl font-bold text-[#1A2A1E]">
+            {t('Binaural Beats Meditation', 'বিনরাল বিটস মেডিটেশন')}
+          </h3>
+          <p className="text-[#636E72] text-sm leading-relaxed">
+            {t('Use headphones for the best experience. Binaural beats can help reduce stress, improve focus, and promote deep relaxation during your recovery journey.', 'সবচেয়ে ভালো অভিজ্ঞতার জন্য হেডফোন ব্যবহার করুন। বিনরাল বিটস স্ট্রেস কমাতে, ফোকাস উন্নত করতে এবং আপনার সুস্থতার যাত্রায় গভীর শিথিলতা বাড়াতে সাহায্য করতে পারে।')}
+          </p>
+        </div>
+      )}
 
       {/* Actions */}
       <div className="flex gap-3">

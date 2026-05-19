@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aligncare-physiotherapy.vercel.app/sitemap.xml
