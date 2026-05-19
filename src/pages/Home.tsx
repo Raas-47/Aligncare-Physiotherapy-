@@ -259,13 +259,20 @@ export default function Home() {
           <p className="text-[#636E72] text-lg font-medium font-serif italic text-opacity-80">Use our simple digital tools to track your progress and do your exercises properly.</p>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <FeatureCard 
             to="/exercises"
             icon={<Activity className="w-8 h-8 text-[#4A7C59]" />}
             title={t("Today's Exercises", 'আজকের ব্যায়াম')}
             subtitle={t('Watch guided videos and follow along.', 'ভিডিও দেখুন এবং একসাথে ব্যায়াম করুন।')}
             bgColor="bg-[#EAF2EA]"
+          />
+          <FeatureCard 
+            to="/meditation"
+            icon={<HeartPulse className="w-8 h-8 text-[#8E44AD]" />}
+            title={t('Meditation', 'মেডিটেশন')}
+            subtitle={t('Relax with binaural beats.', 'বিনরাল বিটস দিয়ে শিথিল হন।')}
+            bgColor="bg-[#F5EEF8]"
           />
           <FeatureCard 
             to="/pain-check"

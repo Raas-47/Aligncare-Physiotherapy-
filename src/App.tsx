@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Booking from './pages/Booking';
 import Exercises from './pages/Exercises';
 import PainCheck from './pages/PainCheck';
+import Meditation from './pages/Meditation';
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="book" element={<Booking />} />
             <Route path="exercises" element={<Exercises />} />
             <Route path="pain-check" element={<PainCheck />} />
+            <Route path="meditation" element={<Meditation />} />
           </Route>
         </Routes>
       </BrowserRouter>
