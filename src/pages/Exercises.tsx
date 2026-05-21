@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { PlayCircle, CheckCircle2, ChevronLeft, ChevronRight, Volume2, Info } from 'lucide-react';
 import { cn } from '../lib/utils';
@@ -42,7 +42,44 @@ export default function Exercises() {
   useEffect(() => {
     setRepsDone(0);
     setIsPlaying(false);
+    window.speechSynthesis.cancel();
   }, [currentIdx]);
+
+  let utteranceRef = useRef<SpeechSynthesisUtterance | null>(null);
+
+  const togglePlay = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+      window.speechSynthesis.cancel();
+    } else {
+      setIsPlaying(true);
+      
+      // Play a reliable chime to guarantee audio output
+      const chime = new Audio("https://actions.google.com/sounds/v1/alarms/dinner_bell_triangle.ogg");
+      chime.play().catch(e => console.error("Audio block:", e));
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        
+        const text = lang === 'en' 
+          ? `Now starting ${currentEx.title.en}. Your goal is ${currentEx.reps} repetitions.` 
+          : `এখন শুরু হচ্ছে ${currentEx.title.bn}. আপনার লক্ষ্য ${currentEx.reps} বার।`;
+          
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang === 'en' ? 'en-US' : 'bn-IN';
+        
+        // Prevent garbage collection by keeping a reference
+        utteranceRef.current = utterance;
+        
+        // Delay speech slightly to let the chime ring
+        setTimeout(() => {
+          if (utteranceRef.current) {
+             window.speechSynthesis.speak(utteranceRef.current);
+          }
+        }, 1000);
+      }
+    }
+  };
 
   const markCompleted = () => {
     const next = [...exercises];
@@ -113,7 +150,7 @@ export default function Exercises() {
         {/* Play Button Overlay */}
         {!isPlaying && (
           <button 
-            onClick={() => setIsPlaying(true)}
+            onClick={togglePlay}
             className="absolute inset-0 flex items-center justify-center bg-black/20 hover:bg-black/10 transition-colors z-10"
           >
              <PlayCircle className="w-16 h-16 text-white drop-shadow-lg" />

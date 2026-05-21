@@ -44,8 +44,35 @@ export default function Home() {
   const { lang, t } = useLanguage();
 
   return (
-    <div className="bg-[#F5F7F5] min-h-screen">
+    <div className="bg-[#F5F7F5] min-h-screen relative overflow-hidden">
       
+      {/* Abstract Background Shapes - Physiotherapy Theme */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+        {/* Subtle geometric circles representing joints/nodes */}
+        <svg className="absolute top-[-5%] right-[-5%] w-[60%] md:w-[45%] h-[60%] md:h-[45%] text-[#EAF2EA] opacity-70 animate-[spin_100s_linear_infinite]" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="100" cy="100" r="90" stroke="currentColor" strokeWidth="2" strokeDasharray="10 10" />
+          <circle cx="100" cy="100" r="60" stroke="currentColor" strokeWidth="1" />
+          <circle cx="100" cy="100" r="30" stroke="currentColor" strokeWidth="4" />
+          <line x1="100" y1="10" x2="100" y2="190" stroke="currentColor" strokeWidth="1" />
+          <line x1="10" y1="100" x2="190" y2="100" stroke="currentColor" strokeWidth="1" />
+          <circle cx="100" cy="10" r="4" fill="currentColor" />
+          <circle cx="100" cy="190" r="4" fill="currentColor" />
+          <circle cx="10" cy="100" r="4" fill="currentColor" />
+          <circle cx="190" cy="100" r="4" fill="currentColor" />
+        </svg>
+        
+        {/* Abstract spine curve & movement arcs */}
+        <svg className="absolute bottom-[5%] left-[-10%] w-[50%] md:w-[35%] h-[50%] md:h-[35%] text-[#D5E5D5] opacity-60" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 40 160 C 80 160 120 120 120 80 C 120 40 160 20 180 20" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
+          <path d="M 40 180 C 90 180 140 130 140 80 C 140 30 180 10 200 10" stroke="currentColor" strokeWidth="2" strokeDasharray="6 6" strokeLinecap="round" opacity="0.6" />
+          <circle cx="40" cy="160" r="10" fill="currentColor" />
+          <circle cx="120" cy="80" r="8" fill="currentColor" opacity="0.8" />
+          <circle cx="180" cy="20" r="6" fill="currentColor" opacity="0.6" />
+          <circle cx="80" cy="130" r="5" fill="currentColor" opacity="0.4" />
+          <circle cx="150" cy="40" r="4" fill="currentColor" opacity="0.3" />
+        </svg>
+      </div>
+
       {/* Hero Section */}
       <section className="relative px-6 py-16 md:py-24 max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-12">
         <div className="flex-1 space-y-8 text-center md:text-left z-10">
@@ -128,8 +155,21 @@ export default function Home() {
       </section>
 
       {/* Core Services Section */}
-      <section className="bg-white py-20 px-6 border-y border-[#E0E6E0]">
-        <div className="max-w-5xl mx-auto space-y-12">
+      <section className="bg-white py-20 px-6 border-y border-[#E0E6E0] relative overflow-hidden">
+        {/* Elegant Spine Curve background */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none z-0">
+          <svg className="w-full h-full max-h-[800px] object-cover" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M 200 50 C 250 150, 150 250, 200 350 C 250 450, 150 550, 200 650 C 250 750, 200 780, 200 800" stroke="#1A2A1E" strokeWidth="12" strokeLinecap="round" strokeDasharray="1 30"/>
+            <circle cx="200" cy="50" r="10" fill="#1A2A1E"/>
+            <circle cx="230" cy="180" r="8" fill="#1A2A1E"/>
+            <circle cx="170" cy="300" r="8" fill="#1A2A1E"/>
+            <circle cx="225" cy="420" r="8" fill="#1A2A1E"/>
+            <circle cx="175" cy="530" r="8" fill="#1A2A1E"/>
+            <circle cx="220" cy="640" r="8" fill="#1A2A1E"/>
+            <circle cx="200" cy="800" r="10" fill="#1A2A1E"/>
+          </svg>
+        </div>
+        <div className="max-w-5xl mx-auto space-y-12 relative z-10">
           <div className="text-center max-w-2xl mx-auto space-y-4">
             <h2 className="text-[#4A7C59] font-medium tracking-[0.2em] uppercase text-xs">Core Specialties</h2>
             <h3 className="text-4xl md:text-5xl font-serif text-[#1A2A1E]">Comprehensive Care</h3>
@@ -206,14 +246,14 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex justify-center pt-8">
+        <div className="flex justify-center pt-10">
           <a 
             href="https://g.page/r/Cb-u7tj6fTLIEAE/review"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-[#E0Dcd0] text-[#1A2A1E] font-medium rounded-full shadow-sm hover:border-[#1A2A1E] hover:bg-[#F5F2ED] transition-all"
+            className="inline-flex items-center gap-4 px-10 py-5 bg-white border border-[#E0Dcd0] text-[#1A2A1E] font-bold text-xl md:text-2xl rounded-full shadow-lg hover:shadow-xl hover:border-[#1A2A1E] hover:bg-[#F5F2ED] transition-all transform hover:-translate-y-1"
           >
-            <svg className="w-5 h-5 text-[#F1C40F]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+            <svg className="w-8 h-8 text-[#F1C40F]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
             Review us on Google
           </a>
         </div>
